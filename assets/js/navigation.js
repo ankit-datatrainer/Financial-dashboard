@@ -108,10 +108,28 @@
             // Notification bell (demo)
             const notifBtn = document.getElementById('notification-btn');
             if (notifBtn) {
-                notifBtn.addEventListener('click', () => {
+                notifBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     this.showNotificationPanel();
                 });
             }
+
+            // Click outside to dismiss popovers
+            document.addEventListener('click', (e) => {
+                const notifPanel = document.getElementById('notification-panel');
+                if (notifPanel && notifPanel.classList.contains('active')) {
+                    if (!notifPanel.contains(e.target)) {
+                        notifPanel.classList.remove('active');
+                    }
+                }
+                const searchResults = document.getElementById('search-results');
+                const searchContainer = document.querySelector('.search-container');
+                if (searchResults && searchResults.classList.contains('active')) {
+                    if (!searchContainer.contains(e.target)) {
+                        searchResults.classList.remove('active');
+                    }
+                }
+            });
         },
 
         navigateTo(pageId) {
@@ -339,7 +357,12 @@
             const drawer = document.getElementById('evidence-drawer');
             if (!drawer || !window.DashboardData) return;
             
-            const evidence = window.DashboardData.evidenceRecords.find(e => e.id === evidenceId);
+            const records = window.DashboardData.evidenceRecords || [];
+            // Match exact or flexible ID (EV-001 -> EVD-001)
+            let evidence = records.find(e => e.id === evidenceId || e.id === evidenceId.replace('EV-', 'EVD-') || e.id === evidenceId.replace('EVD-', 'EV-'));
+            if (!evidence && records.length > 0) {
+                evidence = records[0];
+            }
             if (!evidence) return;
             
             const content = drawer.querySelector('.evidence-drawer-content');

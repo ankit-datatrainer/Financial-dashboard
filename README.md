@@ -157,3 +157,4 @@ The application is pre-configured for instant zero-configuration deployment to V
 - Integration of real LLM APIs (Gemini 1.5 Pro / Claude 3.5 Sonnet) using structured JSON schemas for automated extraction.
 - Expansion of the company dataset to include **Beyond Meat (BYND)** and **Peloton (PTON)**.
 - Translation of the public-company model to anonymized private credit borrower packages.
+

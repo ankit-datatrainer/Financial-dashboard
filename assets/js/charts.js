@@ -99,6 +99,11 @@
         },
 
         createChart(canvasId, type, data, customOptions) {
+            if (typeof Chart === 'undefined') {
+                console.warn('Chart.js not loaded yet, retrying for ' + canvasId);
+                setTimeout(() => this.createChart(canvasId, type, data, customOptions), 300);
+                return null;
+            }
             const canvas = document.getElementById(canvasId);
             if (!canvas) return null;
 

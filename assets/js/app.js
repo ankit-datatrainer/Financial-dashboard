@@ -39,6 +39,14 @@
             this.renderDataSources();
             this.bindInteractiveControls();
 
+            // Initialize Stress Lab & Evidence Modules
+            if (window.StressTest && window.StressTest.init) {
+                window.StressTest.init();
+            }
+            if (window.EvidenceManager && window.EvidenceManager.init) {
+                window.EvidenceManager.init();
+            }
+
             // Initialize Page 1 charts
             if (window.ChartManager) {
                 setTimeout(() => {
@@ -282,7 +290,7 @@
                         severity: 'low',
                         sevText: 'Healthy Momentum',
                         excerpt: claims[0]?.statement || 'Rapid unit scaling continues across key metropolitan logistics hubs.',
-                        evidenceId: ev[0]?.id || 'EV-001'
+                        evidenceId: ev[0]?.id || 'EVD-'
                     },
                     {
                         title: 'Inventory ramp financed with senior unsecured notes',
@@ -290,7 +298,7 @@
                         severity: 'medium',
                         sevText: 'Watch Leverage',
                         excerpt: 'Capital structure expanded to support rapid vehicle refurbishment centers.',
-                        evidenceId: ev[1]?.id || 'EV-002'
+                        evidenceId: ev[1]?.id || 'EVD-'
                     },
                     {
                         title: 'Management claims confident demand amidst supply headwinds',
@@ -298,7 +306,7 @@
                         severity: 'low',
                         sevText: 'Aligned Narrative',
                         excerpt: 'Management expressed elevated confidence in GPU growth and vehicle supply availability.',
-                        evidenceId: ev[2]?.id || 'EV-003'
+                        evidenceId: ev[2]?.id || 'EVD-'
                     }
                 ];
             } else if (q.includes('2022')) {
@@ -309,7 +317,7 @@
                         severity: 'critical',
                         sevText: 'Critical Stress',
                         excerpt: 'Issuance of $3.275B 10.25% Senior Notes created substantial fixed debt service load.',
-                        evidenceId: 'EV-006'
+                        evidenceId: 'EVD-'
                     },
                     {
                         title: 'Sharp GPU & Gross Margin compression vs optimistic guidance',
@@ -317,7 +325,7 @@
                         severity: 'high',
                         sevText: 'Material Divergence',
                         excerpt: 'Management initially cited temporary used vehicle depreciation; losses accelerated for 3 consecutive quarters.',
-                        evidenceId: 'EV-007'
+                        evidenceId: 'EVD-'
                     },
                     {
                         title: 'Elevated Q&A defensiveness and rising repeated explanations',
@@ -325,7 +333,7 @@
                         severity: 'high',
                         sevText: 'Language Warning',
                         excerpt: 'Frequent hedging regarding vehicle retail demand softness and floorplan borrowing headroom.',
-                        evidenceId: 'EV-008'
+                        evidenceId: 'EVD-'
                     }
                 ];
             } else if (q.includes('2023')) {
@@ -336,7 +344,7 @@
                         severity: 'medium',
                         sevText: 'Restructuring Milestone',
                         excerpt: 'Exchange offered senior secured PIK-toggle notes to defer cash interest payments.',
-                        evidenceId: 'EV-010'
+                        evidenceId: 'EVD-'
                     },
                     {
                         title: 'Inflexion in Gross Profit Per Unit (GPU) exceeding $6,000/car',
@@ -344,7 +352,7 @@
                         severity: 'low',
                         sevText: 'Recovery Indicator',
                         excerpt: 'Management aggressively stripped SG&A expense and optimized wholesale logistics.',
-                        evidenceId: 'EV-011'
+                        evidenceId: 'EVD-'
                     },
                     {
                         title: 'AI model detects language stabilization prior to human rating upgrade',
@@ -352,7 +360,7 @@
                         severity: 'low',
                         sevText: 'AI Early Lead Time',
                         excerpt: 'Management guidance became quantitative and disciplined, matching reported gross margin gains.',
-                        evidenceId: 'EV-012'
+                        evidenceId: 'EVD-'
                     }
                 ];
             } else {
@@ -364,7 +372,7 @@
                         severity: 'low',
                         sevText: 'Confirmed Turnaround',
                         excerpt: 'Core retail operations generate organic cash cushion without capital market reliance.',
-                        evidenceId: 'EV-014'
+                        evidenceId: 'EVD-'
                     },
                     {
                         title: 'Liquidity runway expanded with cash reserves exceeding $1.1B',
@@ -372,7 +380,7 @@
                         severity: 'low',
                         sevText: 'Robust Liquidity',
                         excerpt: 'Debt maturities pushed to 2028-2031, leaving near-term refinancing obligations negligible.',
-                        evidenceId: 'EV-015'
+                        evidenceId: 'EVD-'
                     },
                     {
                         title: 'Management statements align 100% with audited quantitative filings',
@@ -380,7 +388,7 @@
                         severity: 'low',
                         sevText: 'High Fidelity',
                         excerpt: 'Direct and transparent forward guidance validated across consecutive quarterly 10-Q disclosures.',
-                        evidenceId: 'EV-016'
+                        evidenceId: 'EVD-'
                     }
                 ];
             }
@@ -694,7 +702,7 @@
                     </div>
                     <div class="claim-card-footer">
                         <span class="badge badge-secondary">Topic: ${c.topic}</span>
-                        <button class="btn btn-ghost btn-sm" onclick="Navigation.openEvidenceDrawer('EV-001')">
+                        <button class="btn btn-ghost btn-sm" onclick="Navigation.openEvidenceDrawer('EVD-')">
                             Trace Source Passage ↗
                         </button>
                     </div>
@@ -1043,3 +1051,4 @@
         Dashboard.init();
     });
 })();
+

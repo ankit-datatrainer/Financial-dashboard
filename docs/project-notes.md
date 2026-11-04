@@ -70,3 +70,4 @@ To maintain scientific integrity:
 - **Visualization:** Chart.js 4.4 via lightweight CDN.
 - **Theming:** Full CSS variable-driven Institutional Dark Navy (default) and Light theme.
 - **Portability:** 100% static asset deployment ready for GitHub and Vercel.
+

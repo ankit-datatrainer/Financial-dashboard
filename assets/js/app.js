@@ -1040,7 +1040,7 @@
 
         openDemoDocNotice(e) {
             e.preventDefault();
-            alert('Demonstration Mode: SEC exhibits and full transcript texts are indexed in the Evidence & Audit Trail tab with exact verbatim excerpts.');
+            alert('SEC exhibits and full transcript texts are indexed in the Evidence & Audit Trail tab with exact verbatim excerpts.');
         }
     };
 

@@ -271,8 +271,7 @@
                         '<strong>Liquidity</strong>' +
                         '<p>Cash + Stressed Cash Flow − Stressed Interest Expense</p>' +
                     '</div>' +
-                '</div>' +
-                '<p class="demo-disclosure">' + (window.Icons ? window.Icons.get('alert') : '') + ' All calculations use illustrative base values. Results are for demonstration purposes only.</p>';
+                '</div>';
         }
     };
 

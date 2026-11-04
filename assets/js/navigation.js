@@ -49,7 +49,7 @@
                     e.preventDefault();
                     const page = item.dataset.page;
                     this.navigateTo(page);
-                    if (window.innerWidth <= 768) this.closeMobileMenu();
+                    if (window.innerWidth <= 992) this.closeMobileMenu();
                 });
             });
 
@@ -102,7 +102,7 @@
 
             // Window resize
             window.addEventListener('resize', () => {
-                if (window.innerWidth > 768 && this.mobileMenuOpen) {
+                if (window.innerWidth > 992 && this.mobileMenuOpen) {
                     this.closeMobileMenu();
                 }
             });
@@ -417,7 +417,6 @@
                 '<div class="evidence-source-link">' +
                     '<a href="' + ev.source_url + '" target="_blank" rel="noopener" class="btn btn-secondary">Open Source Document ' + (window.Icons ? window.Icons.get('external') : '') + '</a>' +
                 '</div>' +
-                '<p class="demo-disclosure">' + (window.Icons ? window.Icons.get('alert') : '') + ' Demonstration Mode — Illustrative example, not verified historical data.</p>' +
             '</div>';
         }
     };

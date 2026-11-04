@@ -142,7 +142,12 @@
         renderScenarioCards() {
             const scenarios = ['base', 'custom', 'moderate', 'severe'];
             const labels = { base: 'Base Case', custom: 'Your Scenario', moderate: 'Moderate Stress', severe: 'Severe Stress' };
-            const icons = { base: '✅', custom: '🔧', moderate: '⚠️', severe: '🔴' };
+            const icons = { 
+                base: window.Icons ? window.Icons.get('check') : '', 
+                custom: window.Icons ? window.Icons.get('wrench') : '', 
+                moderate: window.Icons ? window.Icons.get('alert') : '', 
+                severe: window.Icons ? window.Icons.get('alert') : '' 
+            };
 
             scenarios.forEach(key => {
                 const container = document.getElementById('stress-card-' + key);
@@ -267,7 +272,7 @@
                         '<p>Cash + Stressed Cash Flow − Stressed Interest Expense</p>' +
                     '</div>' +
                 '</div>' +
-                '<p class="demo-disclosure">⚠️ All calculations use illustrative base values. Results are for demonstration purposes only.</p>';
+                '<p class="demo-disclosure">' + (window.Icons ? window.Icons.get('alert') : '') + ' All calculations use illustrative base values. Results are for demonstration purposes only.</p>';
         }
     };
 

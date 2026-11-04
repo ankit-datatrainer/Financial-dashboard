@@ -10,25 +10,39 @@
         searchOpen: false,
 
         pages: [
-            { id: 'overview', label: 'Company Overview', icon: '◉' },
-            { id: 'financial', label: 'Financial Trends', icon: '📊' },
-            { id: 'language', label: 'Management Language', icon: '💬' },
-            { id: 'divergence', label: 'Management vs Numbers', icon: '⚡' },
-            { id: 'credit', label: 'Credit Events & Debt', icon: '🏦' },
-            { id: 'stress', label: 'Stress Testing', icon: '🔬' },
-            { id: 'comparison', label: 'AI vs Human Analysis', icon: '🤖' },
-            { id: 'evidence', label: 'Evidence & Audit Trail', icon: '📋' },
-            { id: 'sources', label: 'Data Sources', icon: '🔗' }
+            { id: 'overview', label: 'Company Overview', icon: 'overview' },
+            { id: 'financial', label: 'Financial Trends', icon: 'financial' },
+            { id: 'language', label: 'Management Language', icon: 'language' },
+            { id: 'divergence', label: 'Management vs Numbers', icon: 'divergence' },
+            { id: 'credit', label: 'Credit Events & Debt', icon: 'credit' },
+            { id: 'stress', label: 'Stress Testing', icon: 'stress' },
+            { id: 'comparison', label: 'AI vs Human Analysis', icon: 'comparison' },
+            { id: 'evidence', label: 'Evidence & Audit Trail', icon: 'evidence' },
+            { id: 'sources', label: 'Data Sources', icon: 'sources' }
         ],
 
         init() {
+            if (window.Icons) window.Icons.renderAll();
             this.bindEvents();
             this.loadThemePreference();
-            this.navigateTo('overview');
+            
+            // Check initial URL hash
+            const hash = window.location.hash.replace('#', '');
+            const initialPage = this.pages.some(p => p.id === hash) ? hash : 'overview';
+            this.navigateTo(initialPage);
+            
             this.updateQuarterSelector();
         },
 
         bindEvents() {
+            // Listen for hashchange (browser forward/back and direct navigation)
+            window.addEventListener('hashchange', () => {
+                const pageId = window.location.hash.replace('#', '');
+                if (pageId && this.pages.some(p => p.id === pageId) && pageId !== this.currentPage) {
+                    this.navigateTo(pageId);
+                }
+            });
+
             // Sidebar nav clicks
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', (e) => {
@@ -210,7 +224,7 @@
             document.body.classList.toggle('theme-light', !this.isDarkTheme);
             
             const icon = document.querySelector('#theme-toggle .theme-icon');
-            if (icon) icon.textContent = this.isDarkTheme ? '☀️' : '🌙';
+            if (icon && window.Icons) icon.innerHTML = window.Icons.get(this.isDarkTheme ? 'sun' : 'moon');
             
             localStorage.setItem('sanah-theme', this.isDarkTheme ? 'dark' : 'light');
 
@@ -226,7 +240,7 @@
                 this.isDarkTheme = false;
                 document.body.classList.add('theme-light');
                 const icon = document.querySelector('#theme-toggle .theme-icon');
-                if (icon) icon.textContent = '🌙';
+                if (icon && window.Icons) icon.innerHTML = window.Icons.get('moon');
             }
         },
 
@@ -401,9 +415,9 @@
                     (ev.error_category ? '<span class="badge badge-watch">Error: ' + ev.error_category + '</span>' : '') +
                 '</div>' +
                 '<div class="evidence-source-link">' +
-                    '<a href="' + ev.source_url + '" target="_blank" rel="noopener" class="btn btn-secondary">Open Source Document</a>' +
+                    '<a href="' + ev.source_url + '" target="_blank" rel="noopener" class="btn btn-secondary">Open Source Document ' + (window.Icons ? window.Icons.get('external') : '') + '</a>' +
                 '</div>' +
-                '<p class="demo-disclosure">⚠️ Demonstration Mode — Illustrative example, not verified historical data.</p>' +
+                '<p class="demo-disclosure">' + (window.Icons ? window.Icons.get('alert') : '') + ' Demonstration Mode — Illustrative example, not verified historical data.</p>' +
             '</div>';
         }
     };

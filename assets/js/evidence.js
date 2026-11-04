@@ -154,8 +154,8 @@
                     '<td class="' + confidenceClass + '">' + r.confidence + '%</td>' +
                     '<td>' + errorBadge + '</td>' +
                     '<td>' +
-                        '<button class="btn btn-ghost btn-sm" onclick="Navigation.openEvidenceDrawer(\'' + r.id + '\')" title="View details">📋</button>' +
-                        '<a href="' + r.source_url + '" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" title="Open source">🔗</a>' +
+                        '<button class="btn btn-ghost btn-sm" onclick="Navigation.openEvidenceDrawer(\'' + r.id + '\')" title="View details">' + (window.Icons ? window.Icons.get('evidence') : 'View') + '</button>' +
+                        '<a href="' + r.source_url + '" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" title="Open source">' + (window.Icons ? window.Icons.get('external') : 'Link') + '</a>' +
                     '</td>' +
                 '</tr>';
             }).join('');

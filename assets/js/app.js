@@ -2,7 +2,7 @@
  * Sanah's AI + Private Credit Research Dashboard
  * Core Application Controller (app.js)
  * 
- * ⚠️ DEMONSTRATION MODE — All data is illustrative and for research architecture demonstration.
+ * DEMONSTRATION MODE — All data is illustrative and for research architecture demonstration.
  */
 
 (function() {
@@ -155,13 +155,13 @@
                     </div>
                     <div class="company-header-actions">
                         <button class="btn btn-secondary btn-sm" onclick="Navigation.navigateTo('evidence')">
-                            <span>📋</span> Audit Trail
+                            ${window.Icons ? window.Icons.get('evidence') : ''} Audit Trail
                         </button>
                         <button class="btn btn-primary btn-sm" onclick="Navigation.navigateTo('stress')">
-                            <span>🔬</span> Stress Lab
+                            ${window.Icons ? window.Icons.get('stress') : ''} Stress Lab
                         </button>
                         <button class="btn btn-ghost btn-sm" onclick="Dashboard.openMethodologyModal()">
-                            <span>ℹ️</span> Playbook Specs
+                            ${window.Icons ? window.Icons.get('info') : ''} Playbook Specs
                         </button>
                     </div>
                 </div>
@@ -263,7 +263,7 @@
                         <span class="kpi-number">${avgDiv} <span class="kpi-unit">/ 3.0</span></span>
                     </div>
                     <div class="kpi-sub-stat">
-                        <span>${parseFloat(avgDiv) >= 2.0 ? '🔴 Material Mismatch' : parseFloat(avgDiv) >= 1.0 ? '🟡 Mild Inconsistency' : '🟢 Aligned Messaging'}</span>
+                        <span>${parseFloat(avgDiv) >= 2.0 ? '<span class="notif-dot red" style="display:inline-block; margin-right:4px;"></span> Material Mismatch' : parseFloat(avgDiv) >= 1.0 ? '<span class="notif-dot amber" style="display:inline-block; margin-right:4px;"></span> Mild Inconsistency' : '<span class="notif-dot green" style="display:inline-block; margin-right:4px;"></span> Aligned Messaging'}</span>
                     </div>
                 </div>
             `;
@@ -787,7 +787,7 @@
                         </p>
                         <div class="divergence-action-row">
                             <button class="btn btn-secondary btn-sm" onclick="Navigation.openEvidenceDrawer('${d.evidence_id}')">
-                                📋 Inspect Evidence Record (${d.evidence_id})
+                                ${window.Icons ? window.Icons.get('evidence') : ''} Inspect Evidence Record (${d.evidence_id})
                             </button>
                         </div>
                     </div>
@@ -877,7 +877,7 @@
                         `).join('')}
                     </div>
                     <div class="covenant-integrity-notice">
-                        <strong>🛡️ Research Playbook Covenant Rule:</strong>
+                        <strong>${window.Icons ? window.Icons.get('shield') : ''} Research Playbook Covenant Rule:</strong>
                         Only display covenants when explicitly supported by 10-Q/10-K or Credit Agreement exhibits. Never invent arbitrary headroom percentages or breaches where not public.
                     </div>
                 `;
@@ -920,8 +920,8 @@
                         </td>
                         <td>
                             ${isAgreed 
-                                ? '<span class="text-green">✓ Consensus</span>' 
-                                : '<span class="text-amber">⚡ Divergent (' + (s.warning_lead_time || 'Lead signal') + ')</span>'}
+                                ? '<span class="text-green">' + (window.Icons ? window.Icons.get('check') : '') + ' Consensus</span>' 
+                                : '<span class="text-amber">' + (window.Icons ? window.Icons.get('divergence') : '') + ' Divergent (' + (s.warning_lead_time || 'Lead signal') + ')</span>'}
                         </td>
                         <td>
                             <small class="text-muted">${s.warning_lead_time || 'In sync'}</small>

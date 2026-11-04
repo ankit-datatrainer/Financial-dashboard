@@ -1,5 +1,5 @@
 // Sanah's AI + Private Credit Research Dashboard — Illustrative Demo Data
-// ⚠️ DEMONSTRATION MODE — All values are illustrative. Not verified historical Carvana data.
+// DEMONSTRATION MODE — All values are illustrative. Not verified historical Carvana data.
 // This dataset is modeled after Carvana Co. (NYSE: CVNA) credit trajectory (2021-2024),
 // designed to evaluate whether AI can detect credit deterioration earlier than traditional
 // quantitative models by analyzing management narrative (MD&A, Earnings Calls) alongside financial metrics.
@@ -2270,7 +2270,7 @@
      */
     const DashboardData = {
         isDemo: true,
-        demoNotice: "⚠️ DEMONSTRATION MODE — All values are illustrative. Not verified historical Carvana data.",
+        demoNotice: "DEMONSTRATION MODE — All values are illustrative. Not verified historical Carvana data.",
         companyInfo: companyInfo,
         quarterlyData: quarterlyData,
         financialRatios: financialRatios,

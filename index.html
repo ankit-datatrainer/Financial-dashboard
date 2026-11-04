@@ -31,14 +31,14 @@
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <div class="brand-logo-mark">
-                    <span class="brand-icon">⚡</span>
+                    <span class="brand-icon" data-icon="divergence"></span>
                     <div class="brand-text">
                         <span class="brand-name">SANAH AI</span>
                         <span class="brand-sub">CREDIT RESEARCH</span>
                     </div>
                 </div>
                 <button id="sidebar-toggle" class="sidebar-collapse-btn" title="Toggle Sidebar">
-                    <span class="toggle-icon">◀</span>
+                    <span class="toggle-icon" data-icon="chevron-left"></span>
                 </button>
             </div>
 
@@ -50,44 +50,44 @@
             <nav class="sidebar-nav">
                 <div class="nav-section-label">Core Terminal</div>
                 <a href="#overview" class="nav-item active" data-page="overview">
-                    <span class="nav-icon">◉</span>
+                    <span class="nav-icon" data-icon="overview"></span>
                     <span class="nav-label">Company Overview</span>
                 </a>
                 <a href="#financial" class="nav-item" data-page="financial">
-                    <span class="nav-icon">📊</span>
+                    <span class="nav-icon" data-icon="financial"></span>
                     <span class="nav-label">Financial Trends</span>
                 </a>
                 <a href="#language" class="nav-item" data-page="language">
-                    <span class="nav-icon">💬</span>
+                    <span class="nav-icon" data-icon="language"></span>
                     <span class="nav-label">Management Language</span>
                 </a>
                 <a href="#divergence" class="nav-item" data-page="divergence">
-                    <span class="nav-icon">⚡</span>
+                    <span class="nav-icon" data-icon="divergence"></span>
                     <span class="nav-label">Management vs Numbers</span>
                     <span class="nav-badge-signal">Core</span>
                 </a>
 
                 <div class="nav-section-label">Credit Surveillance</div>
                 <a href="#credit" class="nav-item" data-page="credit">
-                    <span class="nav-icon">🏦</span>
+                    <span class="nav-icon" data-icon="credit"></span>
                     <span class="nav-label">Credit Events & Debt</span>
                 </a>
                 <a href="#stress" class="nav-item" data-page="stress">
-                    <span class="nav-icon">🔬</span>
+                    <span class="nav-icon" data-icon="stress"></span>
                     <span class="nav-label">Interactive Stress Lab</span>
                 </a>
 
                 <div class="nav-section-label">Research & Audit</div>
                 <a href="#comparison" class="nav-item" data-page="comparison">
-                    <span class="nav-icon">🤖</span>
+                    <span class="nav-icon" data-icon="comparison"></span>
                     <span class="nav-label">AI vs Human Analysis</span>
                 </a>
                 <a href="#evidence" class="nav-item" data-page="evidence">
-                    <span class="nav-icon">📋</span>
+                    <span class="nav-icon" data-icon="evidence"></span>
                     <span class="nav-label">Evidence & Audit Trail</span>
                 </a>
                 <a href="#sources" class="nav-item" data-page="sources">
-                    <span class="nav-icon">🔗</span>
+                    <span class="nav-icon" data-icon="sources"></span>
                     <span class="nav-label">Data Sources Registry</span>
                 </a>
             </nav>
@@ -109,7 +109,7 @@
         <header class="top-bar">
             <div class="top-bar-left">
                 <button id="mobile-menu-btn" class="mobile-menu-trigger" aria-label="Open Navigation">
-                    <span>☰</span>
+                    <span data-icon="menu"></span>
                 </button>
                 <div class="project-header-title">
                     <span class="project-main-title">AI + Private Credit Research</span>
@@ -144,7 +144,7 @@
                 <!-- Search Trigger -->
                 <div class="search-container">
                     <button id="search-toggle" class="btn-icon" title="Search Claims, Evidence & Topics (Ctrl+K)">
-                        <span>🔍</span>
+                        <span data-icon="search"></span>
                     </button>
                     <input type="text" id="search-input" class="search-input-field" placeholder="Search claims, evidence, metrics (Ctrl+K)...">
                     <div id="search-results" class="search-dropdown-results"></div>
@@ -152,13 +152,13 @@
 
                 <!-- Export Report Trigger -->
                 <button id="export-report-btn" class="btn btn-secondary btn-sm" title="Export Credit Memorandum">
-                    <span>📑</span> <span class="hide-mobile">Export</span>
+                    <span data-icon="export"></span> <span class="hide-mobile">Export</span>
                 </button>
 
                 <!-- Notification Bell (Demo) -->
                 <div class="notification-wrapper">
                     <button id="notification-btn" class="btn-icon" title="Notifications">
-                        <span>🔔</span>
+                        <span data-icon="bell"></span>
                         <span class="notification-badge">3</span>
                     </button>
                     <div id="notification-panel" class="notification-flyout">
@@ -193,7 +193,7 @@
 
                 <!-- Theme Toggle -->
                 <button id="theme-toggle" class="btn-icon" title="Toggle Dark/Light Mode">
-                    <span class="theme-icon">☀️</span>
+                    <span class="theme-icon" data-icon="sun"></span>
                 </button>
 
                 <!-- Status Environment Pill -->
@@ -212,10 +212,10 @@
             <!-- Persistent Research Disclosure Banner -->
             <div class="demo-banner mb-4">
                 <div class="demo-banner-content">
-                    <span class="demo-banner-icon">⚠️</span>
+                    <span class="demo-banner-icon" data-icon="alert"></span>
                     <span><strong>Demonstration Mode:</strong> Illustrative sample data. Not verified historical Carvana financial information. Built for research architecture demonstration.</span>
                 </div>
-                <button class="btn btn-ghost btn-sm" onclick="this.parentElement.style.display='none'">✕</button>
+                <button class="btn btn-ghost btn-sm" onclick="this.parentElement.style.display='none'"><span data-icon="close"></span></button>
             </div>
 
             <!-- ===================================================================== -->
@@ -540,7 +540,7 @@
 
                 <!-- Research Integrity Callout -->
                 <div class="research-integrity-callout mt-4">
-                    <div class="callout-icon">🛡️</div>
+                    <div class="callout-icon" data-icon="shield"></div>
                     <div class="callout-text">
                         <strong>Research Neutrality Principle:</strong>
                         The system never characterizes management as dishonest or intentionally misleading. The divergence engine strictly isolates and measures mathematically observable discrepancies between qualitative forward optimism and actual reported accounting reality.
@@ -762,7 +762,7 @@
 
                 <!-- Research Backtest Status Callout -->
                 <div class="research-status-callout mt-4">
-                    <div class="status-callout-icon">🧪</div>
+                    <div class="status-callout-icon" data-icon="stress"></div>
                     <div class="status-callout-body">
                         <h4>Formal Evaluation Protocol: In-Design Prototype</h4>
                         <p>To preserve research integrity, precision, recall, and warning lead-time metrics are not fabricated. Statistical backtesting is executed strictly across frozen historical cutoff packages.</p>
@@ -973,10 +973,10 @@
         <aside id="evidence-drawer" class="evidence-drawer" aria-label="Evidence Audit Inspector">
             <div class="evidence-drawer-header">
                 <div class="drawer-header-title">
-                    <span class="drawer-icon">📋</span>
+                    <span class="drawer-icon" data-icon="evidence"></span>
                     <h3>Evidence Audit Inspector</h3>
                 </div>
-                <button class="btn-icon" onclick="Navigation.closeEvidenceDrawer()" title="Close Drawer">✕</button>
+                <button class="btn-icon" onclick="Navigation.closeEvidenceDrawer()" title="Close Drawer"><span data-icon="close"></span></button>
             </div>
             <div class="evidence-drawer-content">
                 <!-- Injected dynamically via Navigation.openEvidenceDrawer -->
@@ -990,7 +990,7 @@
             <div class="modal-card">
                 <div class="modal-header">
                     <h3>Research Playbook & System Architecture</h3>
-                    <button class="btn-icon" onclick="Navigation.closeModal('modal-methodology')">✕</button>
+                    <button class="btn-icon" onclick="Navigation.closeModal('modal-methodology')"><span data-icon="close"></span></button>
                 </div>
                 <div class="modal-body">
                     <h4>Core Research Question</h4>
@@ -1019,7 +1019,7 @@
             <div class="modal-card">
                 <div class="modal-header">
                     <h3>Export Credit Surveillance Memorandum</h3>
-                    <button class="btn-icon" onclick="Navigation.closeModal('modal-export')">✕</button>
+                    <button class="btn-icon" onclick="Navigation.closeModal('modal-export')"><span data-icon="close"></span></button>
                 </div>
                 <div class="modal-body">
                     <p>Generate a standardized research briefing summarizing Carvana's credit trajectory, language divergence signals, and stress lab scenarios for current cutoff quarter.</p>
@@ -1038,7 +1038,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-ghost" onclick="Navigation.closeModal('modal-export')">Cancel</button>
                     <button class="btn btn-primary" onclick="window.print(); Navigation.closeModal('modal-export');">
-                        <span>🖨️</span> Print / Save PDF
+                        <span data-icon="print"></span> Print / Save PDF
                     </button>
                 </div>
             </div>
@@ -1052,25 +1052,28 @@
     <!-- 1. Chart.js CDN for Interactive Visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
-    <!-- 2. Illustrative Demo Dataset -->
+    <!-- 2. Institutional SVG Icon Library -->
+    <script src="assets/js/icons.js"></script>
+
+    <!-- 3. Illustrative Demo Dataset -->
     <script src="assets/js/data.js"></script>
 
-    <!-- 3. Deterministic Financial Math Engine -->
+    <!-- 4. Deterministic Financial Math Engine -->
     <script src="assets/js/financial.js"></script>
 
-    <!-- 4. Chart Manager -->
+    <!-- 5. Chart Manager -->
     <script src="assets/js/charts.js"></script>
 
-    <!-- 5. Stress Testing Module -->
+    <!-- 6. Stress Testing Module -->
     <script src="assets/js/stress-test.js"></script>
 
-    <!-- 6. Evidence & Audit Trail Manager -->
+    <!-- 7. Evidence & Audit Trail Manager -->
     <script src="assets/js/evidence.js"></script>
 
-    <!-- 7. Navigation & Router Controller -->
+    <!-- 8. Navigation & Router Controller -->
     <script src="assets/js/navigation.js"></script>
 
-    <!-- 8. Master Application Controller -->
+    <!-- 9. Master Application Controller -->
     <script src="assets/js/app.js"></script>
 
 </body>

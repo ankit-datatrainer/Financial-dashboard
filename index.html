@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanah's AI + Private Credit Research Dashboard | Early Warning System</title>
+    
+    <!-- Meta & SEO -->
+    <meta name="description" content="AI-Powered Early Warning System for Credit Deterioration. A Grade 10 research project analyzing quantitative metrics vs management narratives.">
+    
+    <!-- Typography: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Design System Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+    <!-- Persistent Global Demo Notice Banner -->
+    <div class="demo-banner">
+        <div class="demo-banner-content">
+            <span class="demo-banner-icon">⚠️</span>
+            <span><strong>Demonstration Mode:</strong> Illustrative sample data. Not verified historical Carvana financial information. Built for research architecture demonstration.</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="this.parentElement.style.display='none'">✕</button>
+    </div>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="mobile-overlay" class="mobile-overlay"></div>
+
+    <div class="app-layout">
+
+        <!-- ========================================================================= -->
+        <!-- SIDEBAR NAVIGATION -->
+        <!-- ========================================================================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo-mark">
+                    <span class="brand-icon">⚡</span>
+                    <div class="brand-text">
+                        <span class="brand-name">SANAH AI</span>
+                        <span class="brand-sub">CREDIT RESEARCH</span>
+                    </div>
+                </div>
+                <button id="sidebar-toggle" class="sidebar-collapse-btn" title="Toggle Sidebar">
+                    <span class="toggle-icon">◀</span>
+                </button>
+            </div>
+
+            <div class="sidebar-research-badge">
+                <span class="pulse-indicator"></span>
+                <span>Early Warning Pilot</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">Core Terminal</div>
+                <a href="#overview" class="nav-item active" data-page="overview">
+                    <span class="nav-icon">◉</span>
+                    <span class="nav-label">Company Overview</span>
+                </a>
+                <a href="#financial" class="nav-item" data-page="financial">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Financial Trends</span>
+                </a>
+                <a href="#language" class="nav-item" data-page="language">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-label">Management Language</span>
+                </a>
+                <a href="#divergence" class="nav-item" data-page="divergence">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Management vs Numbers</span>
+                    <span class="nav-badge-signal">Core</span>
+                </a>
+
+                <div class="nav-section-label">Credit Surveillance</div>
+                <a href="#credit" class="nav-item" data-page="credit">
+                    <span class="nav-icon">🏦</span>
+                    <span class="nav-label">Credit Events & Debt</span>
+                </a>
+                <a href="#stress" class="nav-item" data-page="stress">
+                    <span class="nav-icon">🔬</span>
+                    <span class="nav-label">Interactive Stress Lab</span>
+                </a>
+
+                <div class="nav-section-label">Research & Audit</div>
+                <a href="#comparison" class="nav-item" data-page="comparison">
+                    <span class="nav-icon">🤖</span>
+                    <span class="nav-label">AI vs Human Analysis</span>
+                </a>
+                <a href="#evidence" class="nav-item" data-page="evidence">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-label">Evidence & Audit Trail</span>
+                </a>
+                <a href="#sources" class="nav-item" data-page="sources">
+                    <span class="nav-icon">🔗</span>
+                    <span class="nav-label">Data Sources Registry</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-author-card">
+                    <div class="author-avatar">S</div>
+                    <div class="author-details">
+                        <span class="author-name">Sanah's Project</span>
+                        <span class="author-role">Grade 10 Research Pilot</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ========================================================================= -->
+        <!-- TOP NAVIGATION BAR -->
+        <!-- ========================================================================= -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button id="mobile-menu-btn" class="mobile-menu-trigger" aria-label="Open Navigation">
+                    <span>☰</span>
+                </button>
+                <div class="project-header-title">
+                    <span class="project-main-title">AI + Private Credit Research</span>
+                    <span class="project-sub-tag">Early Warning Deterioration Engine</span>
+                </div>
+            </div>
+
+            <div class="top-bar-center">
+                <!-- Company Selector Pill -->
+                <div class="company-selector-bar">
+                    <button class="company-pill active" title="Active Pilot Subject">
+                        <strong>CVNA</strong> <small>Carvana</small>
+                    </button>
+                    <button class="company-pill disabled" title="Planned Expansion Company" onclick="alert('Beyond Meat (BYND) research dataset planned for Phase 2 expansion.')">
+                        <span>BYND</span> <small>Planned</small>
+                    </button>
+                    <button class="company-pill disabled" title="Planned Expansion Company" onclick="alert('Peloton (PTON) research dataset planned for Phase 2 expansion.')">
+                        <span>PTON</span> <small>Planned</small>
+                    </button>
+                </div>
+
+                <!-- Historical Quarter Selector -->
+                <div class="quarter-selector-wrapper">
+                    <label for="quarter-select" class="quarter-select-label">Cutoff Quarter:</label>
+                    <select id="quarter-select" class="custom-select quarter-dropdown">
+                        <!-- Populated dynamically via navigation.js / data.js -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="top-bar-right">
+                <!-- Search Trigger -->
+                <div class="search-container">
+                    <button id="search-toggle" class="btn-icon" title="Search Claims, Evidence & Topics (Ctrl+K)">
+                        <span>🔍</span>
+                    </button>
+                    <input type="text" id="search-input" class="search-input-field" placeholder="Search claims, evidence, metrics (Ctrl+K)...">
+                    <div id="search-results" class="search-dropdown-results"></div>
+                </div>
+
+                <!-- Export Report Trigger -->
+                <button id="export-report-btn" class="btn btn-secondary btn-sm" title="Export Credit Memorandum">
+                    <span>📑</span> <span class="hide-mobile">Export</span>
+                </button>
+
+                <!-- Notification Bell (Demo) -->
+                <div class="notification-wrapper">
+                    <button id="notification-btn" class="btn-icon" title="Notifications">
+                        <span>🔔</span>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div id="notification-panel" class="notification-flyout">
+                        <div class="notification-flyout-header">
+                            <h5>Surveillance Alerts (Demo)</h5>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item">
+                                <span class="notif-dot red"></span>
+                                <div>
+                                    <strong>Q2 2022 Divergence Alert:</strong>
+                                    <p>Management GPU claims diverged from reported numbers by 2.5/3.0.</p>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <span class="notif-dot amber"></span>
+                                <div>
+                                    <strong>Q1 2023 Restructuring:</strong>
+                                    <p>Out-of-court debt exchange proposal registered with PIK toggles.</p>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <span class="notif-dot green"></span>
+                                <div>
+                                    <strong>Q1 2024 Recovery Detected:</strong>
+                                    <p>AI early signal recognized sustainable gross margin expansion.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="btn-icon" title="Toggle Dark/Light Mode">
+                    <span class="theme-icon">☀️</span>
+                </button>
+
+                <!-- Status Environment Pill -->
+                <div class="env-pill">
+                    <span class="env-dot"></span>
+                    <span>Demo Mode</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========================================================================= -->
+        <!-- MAIN CONTENT AREA (9 DEDICATED RESEARCH PAGES) -->
+        <!-- ========================================================================= -->
+        <main class="main-content">
+
+            <!-- ===================================================================== -->
+            <!-- PAGE 1: COMPANY OVERVIEW -->
+            <!-- ===================================================================== -->
+            <section id="page-overview" class="page-section active">
+                
+                <!-- Dynamic Company Header Widget -->
+                <div id="company-header-widget" class="company-header-box">
+                    <!-- Populated by app.js -->
+                </div>
+
+                <!-- Core KPI Status Cards -->
+                <div id="overview-kpi-grid" class="kpi-grid">
+                    <!-- Populated dynamically by app.js -->
+                </div>
+
+                <!-- Risk Trend Line Chart Section -->
+                <div class="dashboard-grid-2col mt-6">
+                    <div class="card chart-card">
+                        <div class="card-header flex justify-between items-center">
+                            <div>
+                                <h3 class="card-title">Multi-Quarter Credit Risk Trajectory</h3>
+                                <p class="card-subtitle">Comparing Quantitative Model, AI Linguistic Signal, and Human Consensus</p>
+                            </div>
+                            <div class="chart-badges">
+                                <span class="badge badge-secondary">16 Quarters</span>
+                                <span class="badge badge-purple">No Foresight Leakage</span>
+                            </div>
+                        </div>
+                        <div class="chart-body" style="height: 320px;">
+                            <canvas id="risk-trend-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Top 3 Reasons for Risk Trajectory Change</h3>
+                            <p class="card-subtitle">Contemporaneous signals explaining current quarter risk rating</p>
+                        </div>
+                        <div id="top-reasons-container" class="card-body reasons-container">
+                            <!-- Populated dynamically by app.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Sparklines & Overview Charts -->
+                <div class="dashboard-grid-2col mt-6">
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Revenue Trajectory ($ Millions)</h3>
+                            <p class="card-subtitle">Quarterly net sales growth and contraction cycle</p>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="overview-revenue-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Cash Reserves vs Total Debt Burden ($ Millions)</h3>
+                            <p class="card-subtitle">Balance sheet flexibility and refinancing cliff exposure</p>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="overview-cash-debt-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Event Timeline Preview -->
+                <div class="card mt-6">
+                    <div class="card-header flex justify-between items-center">
+                        <div>
+                            <h3 class="card-title">Recent Credit & Restructuring Milestones</h3>
+                            <p class="card-subtitle">Key capital structure modifications and operational catalysts</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="Navigation.navigateTo('credit')">
+                            View Full Debt & Covenant Surveillance →
+                        </button>
+                    </div>
+                    <div id="overview-timeline-preview" class="timeline-preview-container">
+                        <!-- Populated by app.js -->
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- PAGE 2: FINANCIAL TREND DASHBOARD -->
+            <!-- ===================================================================== -->
+            <section id="page-financial" class="page-section">
+                <div class="page-header-block">
+                    <div>
+                        <h2 class="page-title">Financial Trend Dashboard</h2>
+                        <p class="page-subtitle">Quantitative financial metrics computed deterministically before AI qualitative interpretation</p>
+                    </div>
+                    <div class="page-header-actions">
+                        <span class="badge badge-secondary">Deterministic Math Engine (No LLM Arithmetic)</span>
+                    </div>
+                </div>
+
+                <!-- Derived Ratio Cards -->
+                <div id="financial-ratio-cards" class="kpi-grid mt-4">
+                    <!-- Populated by app.js -->
+                </div>
+
+                <!-- 6 Interactive Financial Charts -->
+                <div class="charts-2col-grid mt-6">
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">1. Revenue by Quarter ($M)</h4>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="financial-revenue-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">2. Profitability Metrics ($M)</h4>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="financial-profit-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">3. Cash Position vs Total Debt ($M)</h4>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="financial-cash-debt-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">4. Operating Cash Flow ($M)</h4>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="financial-ocf-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">5. Gross Margin Trend (%)</h4>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="financial-margin-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">6. Interest Expense Burden ($M)</h4>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="financial-interest-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete Normalized Financial Statements Table -->
+                <div class="card mt-6">
+                    <div class="card-header flex justify-between items-center">
+                        <div>
+                            <h3 class="card-title">Complete 16-Quarter Normalized Financial Statement</h3>
+                            <p class="card-subtitle">Click any row to synchronize global research cutoff quarter</p>
+                        </div>
+                        <span class="badge badge-info">16 Quarters Contained</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Quarter</th>
+                                    <th>Revenue</th>
+                                    <th>Gross Profit</th>
+                                    <th>Margin</th>
+                                    <th>Oper. Inc.</th>
+                                    <th>EBITDA</th>
+                                    <th>Net Income</th>
+                                    <th>Cash</th>
+                                    <th>Total Debt</th>
+                                    <th>OCF</th>
+                                    <th>FCF</th>
+                                    <th>Interest</th>
+                                </tr>
+                            </thead>
+                            <tbody id="financial-table-body">
+                                <!-- Populated dynamically by app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- PAGE 3: MANAGEMENT LANGUAGE & EARNINGS CALL ANALYSIS -->
+            <!-- ===================================================================== -->
+            <section id="page-language" class="page-section">
+                <div class="page-header-block">
+                    <div>
+                        <h2 class="page-title">Management Language & Earnings Call Analysis</h2>
+                        <p class="page-subtitle">Granular NLP analysis of MD&A disclosures, prepared executive remarks, and analyst Q&A friction</p>
+                    </div>
+                    <div class="filter-group">
+                        <label for="claim-topic-filter" class="filter-label">Filter Topic:</label>
+                        <select id="claim-topic-filter" class="custom-select">
+                            <option value="all">All Topics</option>
+                            <option value="Growth">Growth</option>
+                            <option value="Profitability">Profitability</option>
+                            <option value="Debt">Debt & Refinancing</option>
+                            <option value="Liquidity">Liquidity</option>
+                            <option value="ADESA">ADESA Acquisition</option>
+                            <option value="Cost Reduction">Cost Reduction</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Document Type Filter Tabs -->
+                <div class="tab-group mt-4">
+                    <button class="tab-btn active" data-doc-tab="all">All Documents</button>
+                    <button class="tab-btn" data-doc-tab="MD&A">MD&A Reports (10-Q / 10-K)</button>
+                    <button class="tab-btn" data-doc-tab="Prepared Remarks">Prepared Remarks</button>
+                    <button class="tab-btn" data-doc-tab="Q&A">Analyst Q&A Transcripts</button>
+                    <button class="tab-btn" data-doc-tab="Shareholder Letter">Shareholder Letters</button>
+                </div>
+
+                <!-- Language Feature Scores Grid -->
+                <div id="language-scores-grid" class="kpi-grid mt-4">
+                    <!-- Populated by app.js -->
+                </div>
+
+                <!-- Linguistic Charts Grid -->
+                <div class="charts-2col-grid mt-6">
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">Qualitative Dimensions (0 to 3.0 Scale)</h4>
+                            <p class="card-subtitle">Separate indicators for Tone, Uncertainty, Specificity, and Defensiveness</p>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="language-trend-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">New Risk Themes vs Repeated Explanations</h4>
+                            <p class="card-subtitle">Tracking emergence of new headwinds vs recurring management excuses</p>
+                        </div>
+                        <div class="chart-body" style="height: 280px;">
+                            <canvas id="language-themes-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What Changed Since Last Quarter Panel -->
+                <div id="what-changed-panel" class="card mt-6">
+                    <!-- Populated dynamically by app.js -->
+                </div>
+
+                <!-- Management Claims Feed -->
+                <div class="card mt-6">
+                    <div class="card-header flex justify-between items-center">
+                        <div>
+                            <h3 class="card-title">Extracted Management Claims & Evidence Quotations</h3>
+                            <p class="card-subtitle">Traceable statements linked to source transcripts and regulatory filings</p>
+                        </div>
+                        <span class="badge badge-purple">NLP Entity & Sentiment Extraction</span>
+                    </div>
+                    <div id="management-claims-list" class="claims-feed-container">
+                        <!-- Populated by app.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- PAGE 4: MANAGEMENT VS NUMBERS DIVERGENCE (SIGNATURE RESEARCH VIEW) -->
+            <!-- ===================================================================== -->
+            <section id="page-divergence" class="page-section">
+                <div class="page-header-block">
+                    <div>
+                        <h2 class="page-title">Management vs Numbers Divergence</h2>
+                        <p class="page-subtitle">The Core Research Engine: Comparing executive claims directly against contemporaneous financial performance</p>
+                    </div>
+                    <div class="filter-group">
+                        <label for="divergence-severity-filter" class="filter-label">Filter Severity:</label>
+                        <select id="divergence-severity-filter" class="custom-select">
+                            <option value="all">All Divergence Scores (0-3)</option>
+                            <option value="0">Score 0: Aligned</option>
+                            <option value="1">Score 1: Mild Inconsistency</option>
+                            <option value="2">Score 2: Material Inconsistency</option>
+                            <option value="3">Score 3: Repeated Contradiction</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Divergence Analytical Charts -->
+                <div class="dashboard-grid-2col mt-4">
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">Divergence Severity Trajectory Across Quarters</h4>
+                            <p class="card-subtitle">Quantified mismatch score (0: Aligned to 3: Repeated Contradiction)</p>
+                        </div>
+                        <div class="chart-body" style="height: 260px;">
+                            <canvas id="divergence-trend-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">Divergence Score Distribution</h4>
+                            <p class="card-subtitle">Fidelity of management narrative across historical dataset</p>
+                        </div>
+                        <div class="chart-body" style="height: 260px;">
+                            <canvas id="divergence-distribution-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research Integrity Callout -->
+                <div class="research-integrity-callout mt-4">
+                    <div class="callout-icon">🛡️</div>
+                    <div class="callout-text">
+                        <strong>Research Neutrality Principle:</strong>
+                        The system never characterizes management as dishonest or intentionally misleading. The divergence engine strictly isolates and measures mathematically observable discrepancies between qualitative forward optimism and actual reported accounting reality.
+                    </div>
+                </div>
+
+                <!-- Signature 3-Column Divergence Feed -->
+                <div class="mt-6">
+                    <h3 class="section-heading mb-4">Contemporaneous Triangulation Analysis</h3>
+                    <div id="divergence-items-container" class="divergence-feed">
+                        <!-- Populated dynamically by app.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- PAGE 5: CREDIT EVENTS, DEBT & COVENANT SURVEILLANCE -->
+            <!-- ===================================================================== -->
+            <section id="page-credit" class="page-section">
+                <div class="page-header-block">
+                    <div>
+                        <h2 class="page-title">Credit Events, Debt & Covenant Surveillance</h2>
+                        <p class="page-subtitle">Tracking capital structure evolution, debt maturities, exchange offers, and covenant restrictions</p>
+                    </div>
+                </div>
+
+                <!-- Debt & Interest Chart -->
+                <div class="card chart-card mt-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Total Debt Burden vs Quarterly Cash Interest Run-Rate ($M)</h3>
+                        <p class="card-subtitle">Visualizing the 2022 debt explosion and 2023 debt-for-equity/PIK restructuring</p>
+                    </div>
+                    <div class="chart-body" style="height: 300px;">
+                        <canvas id="credit-debt-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Debt Structure Schedule -->
+                <div class="card mt-6">
+                    <div class="card-header">
+                        <h3 class="card-title">Capital Structure & Debt Instrument Schedule</h3>
+                        <p class="card-subtitle">Disclosed senior notes, secured PIK tranches, and revolving floorplan facilities</p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Instrument</th>
+                                    <th>Type</th>
+                                    <th>Principal ($M)</th>
+                                    <th>Coupon Rate</th>
+                                    <th>Maturity</th>
+                                    <th>Status</th>
+                                    <th>Credit Commentary</th>
+                                </tr>
+                            </thead>
+                            <tbody id="debt-instruments-tbody">
+                                <!-- Populated dynamically by app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Covenant Surveillance Section -->
+                <div class="card mt-6">
+                    <div class="card-header">
+                        <h3 class="card-title">Credit Agreement & Covenant Surveillance</h3>
+                        <p class="card-subtitle">Verified terms vs non-public covenants from credit exhibits</p>
+                    </div>
+                    <div id="covenant-surveillance-container" class="card-body">
+                        <!-- Populated dynamically by app.js -->
+                    </div>
+                </div>
+
+                <!-- Full Credit Events Chronology -->
+                <div class="card mt-6">
+                    <div class="card-header">
+                        <h3 class="card-title">Comprehensive Credit Milestones & Restructuring Chronology</h3>
+                        <p class="card-subtitle">Objective historical event markers utilized for model backtesting</p>
+                    </div>
+                    <div id="full-credit-timeline" class="credit-timeline-container">
+                        <!-- Populated dynamically by app.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- PAGE 6: INTERACTIVE STRESS TESTING -->
+            <!-- ===================================================================== -->
+            <section id="page-stress" class="page-section">
+                <div class="page-header-block">
+                    <div>
+                        <h2 class="page-title">Interactive Stress Testing Laboratory</h2>
+                        <p class="page-subtitle">Real-time deterministic simulation of adverse operational and macroeconomic shocks</p>
+                    </div>
+                    <div class="scenario-btn-group">
+                        <button class="btn btn-secondary btn-sm" data-scenario="base">Base Case</button>
+                        <button class="btn btn-secondary btn-sm" data-scenario="moderate">Moderate Stress</button>
+                        <button class="btn btn-secondary btn-sm" data-scenario="severe">Severe Stress</button>
+                        <button id="stress-reset" class="btn btn-ghost btn-sm">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Stress Testing Grid: Sliders on Left, Scenarios on Right -->
+                <div class="stress-layout-grid mt-4">
+                    
+                    <!-- Left: Interactive Sliders Panel -->
+                    <div class="card stress-controls-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Macro & Operational Shock Parameters</h3>
+                            <p class="card-subtitle">Adjust sliders to stress baseline financial flexibility in real time</p>
+                        </div>
+                        <div class="card-body stress-sliders-body">
+                            
+                            <!-- Slider 1 -->
+                            <div class="slider-control-group">
+                                <div class="slider-label-row">
+                                    <label for="slider-revenue-decline">Revenue Contraction</label>
+                                    <span id="value-revenue-decline" class="slider-val-badge">0%</span>
+                                </div>
+                                <input type="range" id="slider-revenue-decline" min="0" max="30" step="1" value="0" class="range-slider">
+                                <span class="slider-hint">Simulates used vehicle demand softening & ASP decline</span>
+                            </div>
+
+                            <!-- Slider 2 -->
+                            <div class="slider-control-group">
+                                <div class="slider-label-row">
+                                    <label for="slider-margin-decline">Gross Margin / EBITDA Compression</label>
+                                    <span id="value-margin-decline" class="slider-val-badge">0%</span>
+                                </div>
+                                <input type="range" id="slider-margin-decline" min="0" max="40" step="1" value="0" class="range-slider">
+                                <span class="slider-hint">Vehicle depreciation and reconditioning cost inflation</span>
+                            </div>
+
+                            <!-- Slider 3 -->
+                            <div class="slider-control-group">
+                                <div class="slider-label-row">
+                                    <label for="slider-rate-increase">Benchmark Interest Rate Hike</label>
+                                    <span id="value-rate-increase" class="slider-val-badge">0 bps</span>
+                                </div>
+                                <input type="range" id="slider-rate-increase" min="0" max="300" step="25" value="0" class="range-slider">
+                                <span class="slider-hint">Fed funds / SOFR policy rate expansion on floating debt</span>
+                            </div>
+
+                            <!-- Slider 4 -->
+                            <div class="slider-control-group">
+                                <div class="slider-label-row">
+                                    <label for="slider-refinancing-spread">Refinancing Spread Widening</label>
+                                    <span id="value-refinancing-spread" class="slider-val-badge">0 bps</span>
+                                </div>
+                                <input type="range" id="slider-refinancing-spread" min="0" max="200" step="10" value="0" class="range-slider">
+                                <span class="slider-hint">High yield credit spread penalty on maturity rolls</span>
+                            </div>
+
+                            <!-- Slider 5 -->
+                            <div class="slider-control-group">
+                                <div class="slider-label-row">
+                                    <label for="slider-cashflow-decline">Operating Cash Flow Reduction</label>
+                                    <span id="value-cashflow-decline" class="slider-val-badge">0%</span>
+                                </div>
+                                <input type="range" id="slider-cashflow-decline" min="0" max="40" step="1" value="0" class="range-slider">
+                                <span class="slider-hint">Working capital cash drain and receivables friction</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Right: Dynamic Output Scenario Cards -->
+                    <div class="stress-outputs-column">
+                        <div id="stress-card-base" class="card stress-card"></div>
+                        <div id="stress-card-custom" class="card stress-card active-custom"></div>
+                        <div id="stress-card-moderate" class="card stress-card"></div>
+                        <div id="stress-card-severe" class="card stress-card"></div>
+                    </div>
+
+                </div>
+
+                <!-- Scenario Chart & Comparison Table -->
+                <div class="dashboard-grid-2col mt-6">
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Stress Scenario Output Metrics Comparison</h3>
+                            <p class="card-subtitle">Base vs Moderate vs Severe operational impact</p>
+                        </div>
+                        <div class="chart-body" style="height: 320px;">
+                            <canvas id="stress-comparison-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Comparative Scenario Matrix</h3>
+                            <p class="card-subtitle">Key metrics under defined stress conditions</p>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="stress-comparison-table" class="data-table">
+                                <!-- Populated by stress-test.js -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mathematical Methodology Disclosures -->
+                <div id="stress-methodology" class="card mt-6">
+                    <!-- Populated by stress-test.js -->
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- PAGE 7: AI VS HUMAN VS QUANTITATIVE MODEL -->
+            <!-- ===================================================================== -->
+            <section id="page-comparison" class="page-section">
+                <div class="page-header-block">
+                    <div>
+                        <h2 class="page-title">AI vs Human vs Quantitative Model</h2>
+                        <p class="page-subtitle">Evaluating the core research hypothesis: Does combining qualitative NLP signals with quantitative metrics provide earlier warning than human credit analysts?</p>
+                    </div>
+                </div>
+
+                <!-- Research Backtest Status Callout -->
+                <div class="research-status-callout mt-4">
+                    <div class="status-callout-icon">🧪</div>
+                    <div class="status-callout-body">
+                        <h4>Formal Evaluation Protocol: In-Design Prototype</h4>
+                        <p>To preserve research integrity, precision, recall, and warning lead-time metrics are not fabricated. Statistical backtesting is executed strictly across frozen historical cutoff packages.</p>
+                    </div>
+                </div>
+
+                <!-- Comparison Visualizations -->
+                <div class="dashboard-grid-2col mt-6">
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Multi-Signal Radar Profile (Current Cutoff)</h3>
+                            <p class="card-subtitle">Quant Model vs Sanah AI vs Human Analyst across 6 risk dimensions</p>
+                        </div>
+                        <div class="chart-body" style="height: 300px;">
+                            <canvas id="comparison-radar-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Model Confidence Calibration Over Time</h3>
+                            <p class="card-subtitle">AI confidence level vs Human researcher certainty (%)</p>
+                        </div>
+                        <div class="chart-body" style="height: 300px;">
+                            <canvas id="comparison-confidence-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historical Model Assessment Matrix Table -->
+                <div class="card mt-6">
+                    <div class="card-header flex justify-between items-center">
+                        <div>
+                            <h3 class="card-title">Quarter-by-Quarter Model Decision Matrix</h3>
+                            <p class="card-subtitle">Contemporaneous signals compared with subsequent historical reality</p>
+                        </div>
+                        <span class="badge badge-info">16 Tested Historical Decision Points</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Quarter</th>
+                                    <th>Quant Model</th>
+                                    <th>Sanah AI</th>
+                                    <th>Human Analyst</th>
+                                    <th>Observed Outcome</th>
+                                    <th>Agreement</th>
+                                    <th>Warning Lead Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparison-matrix-tbody">
+                                <!-- Populated dynamically by app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 10 Research Experiments Catalog from Playbook -->
+                <div class="mt-6">
+                    <h3 class="section-heading mb-4">Research Playbook Experiments Catalog</h3>
+                    <div id="research-experiments-container" class="experiments-grid">
+                        <!-- Populated dynamically by app.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- PAGE 8: EVIDENCE & AUDIT TRAIL -->
+            <!-- ===================================================================== -->
+            <section id="page-evidence" class="page-section">
+                <div class="page-header-block">
+                    <div>
+                        <h2 class="page-title">Evidence & Audit Trail Library</h2>
+                        <p class="page-subtitle">Every AI claim, risk score change, and divergence signal mapped to verified SEC filings and transcripts</p>
+                    </div>
+                </div>
+
+                <!-- Evidence Statistics Cards -->
+                <div id="evidence-stats" class="evidence-stats-grid mt-4">
+                    <!-- Populated dynamically by evidence.js -->
+                </div>
+
+                <!-- Filter Controls Bar -->
+                <div class="evidence-filters-bar mt-4">
+                    <input type="text" id="evidence-search" class="custom-input" placeholder="Search verbatim text, speaker, section...">
+                    
+                    <select id="evidence-quarter-filter" class="custom-select">
+                        <option value="all">All Quarters</option>
+                    </select>
+
+                    <select id="evidence-doctype-filter" class="custom-select">
+                        <option value="all">All Document Types</option>
+                        <option value="10-Q">10-Q Filing</option>
+                        <option value="10-K">10-K Filing</option>
+                        <option value="8-K">8-K Material Event</option>
+                        <option value="Earnings Transcript">Earnings Transcript</option>
+                        <option value="Shareholder Letter">Shareholder Letter</option>
+                    </select>
+
+                    <select id="evidence-error-filter" class="custom-select">
+                        <option value="all">All Verification Statuses</option>
+                        <option value="none">Clean Audit Records</option>
+                        <option value="Extraction">Extraction Discrepancies</option>
+                        <option value="Calculation">Calculation Discrepancies</option>
+                        <option value="Reasoning">Reasoning Discrepancies</option>
+                    </select>
+                </div>
+
+                <!-- Main Audit Records Table -->
+                <div class="card mt-4">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th data-sort-evidence="document_type">Document Type ↕</th>
+                                    <th data-sort-evidence="quarter">Quarter ↕</th>
+                                    <th data-sort-evidence="speaker">Speaker ↕</th>
+                                    <th>Verbatim Source Excerpt</th>
+                                    <th data-sort-evidence="confidence">Confidence ↕</th>
+                                    <th>Audit Status</th>
+                                    <th>Inspect</th>
+                                </tr>
+                            </thead>
+                            <tbody id="evidence-table-body">
+                                <!-- Populated dynamically by evidence.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- PAGE 9: DATA SOURCES & RESEARCH REGISTRY -->
+            <!-- ===================================================================== -->
+            <section id="page-sources" class="page-section">
+                <div class="page-header-block">
+                    <div>
+                        <h2 class="page-title">Data Sources & Research Registry</h2>
+                        <p class="page-subtitle">Preserved original source hyperlinks extracted directly from Sanah's Research Playbook document</p>
+                    </div>
+                </div>
+
+                <!-- Verified Data Sources Cards Grid -->
+                <div id="data-sources-container" class="sources-grid mt-4">
+                    <!-- Populated dynamically by app.js -->
+                </div>
+
+                <!-- Private Credit Translation Framework Panel -->
+                <div class="card mt-6">
+                    <div class="card-header">
+                        <h3 class="card-title">Translating Public Company Proof-of-Concept to Private Credit</h3>
+                        <p class="card-subtitle">How every public disclosure maps to an anonymized private portfolio borrower equivalent</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Public Company Source</th>
+                                        <th>Private Credit Equivalent</th>
+                                        <th>Surveillance & Early Warning Significance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>10-Q / 10-K Filings</strong></td>
+                                        <td>Monthly / Quarterly Borrower Financial Package</td>
+                                        <td>Standardized balance sheet, P&L, and cash burn audit.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MD&A Commentary</strong></td>
+                                        <td>Borrower Management Commentary / Sponsor Updates</td>
+                                        <td>Qualitative explanations for EBITDA misses and capex shifts.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Prepared Earnings Remarks</strong></td>
+                                        <td>Quarterly Portfolio Company - Lender Call Presentation</td>
+                                        <td>Executive narrative framing future operational outlook.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Analyst Q&A Transcripts</strong></td>
+                                        <td>Lender Q&A / Deal Team Inquiry Transcripts</td>
+                                        <td>Friction detection when borrower is pressed on covenant headroom.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Public Guidance Revisions</strong></td>
+                                        <td>Annual Budget & Operating Model Re-forecasts</td>
+                                        <td>Tracking persistence of forecast misses over multi-quarter windows.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Credit Agreement Exhibits</strong></td>
+                                        <td>Officer Compliance Certificates</td>
+                                        <td>Contractual covenant thresholds, leverage caps, and cure rights.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ========================================================================= -->
+        <!-- EVIDENCE DRAWER (RIGHT-SIDE SLIDE-IN AUDIT INSPECTOR) -->
+        <!-- ========================================================================= -->
+        <aside id="evidence-drawer" class="evidence-drawer" aria-label="Evidence Audit Inspector">
+            <div class="evidence-drawer-header">
+                <div class="drawer-header-title">
+                    <span class="drawer-icon">📋</span>
+                    <h3>Evidence Audit Inspector</h3>
+                </div>
+                <button class="btn-icon" onclick="Navigation.closeEvidenceDrawer()" title="Close Drawer">✕</button>
+            </div>
+            <div class="evidence-drawer-content">
+                <!-- Injected dynamically via Navigation.openEvidenceDrawer -->
+            </div>
+        </aside>
+
+        <!-- ========================================================================= -->
+        <!-- RESEARCH METHODOLOGY MODAL -->
+        <!-- ========================================================================= -->
+        <div id="modal-methodology" class="modal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Research Playbook & System Architecture</h3>
+                    <button class="btn-icon" onclick="Navigation.closeModal('modal-methodology')">✕</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Core Research Question</h4>
+                    <p><em>"Can AI identify deterioration or improvement in a company's credit quality earlier than traditional financial analysis by combining quantitative financial trends with what management says in MD&A reports and earnings calls?"</em></p>
+                    
+                    <h4 class="mt-4">Triangulation Methodology</h4>
+                    <ol class="methodology-steps">
+                        <li><strong>Quantitative Trajectory:</strong> Deterministic calculation of growth, margins, interest coverage, and liquidity runway.</li>
+                        <li><strong>Qualitative Narrative:</strong> Independent NLP scoring of Tone (0-3), Uncertainty (0-3), Specificity (0-3), and Q&A Defensiveness (0-3).</li>
+                        <li><strong>Divergence Detection:</strong> Algorithmic comparison measuring whether management words align with audited reported accounting realities.</li>
+                    </ol>
+
+                    <h4 class="mt-4">Time Contained Protocol</h4>
+                    <p>To eliminate hindsight bias, each historical quarter functions as a strictly frozen decision point. Predictions utilize only information filed on or before the historical cutoff date.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="Navigation.closeModal('modal-methodology')">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- EXPORT REPORT MODAL -->
+        <!-- ========================================================================= -->
+        <div id="modal-export" class="modal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Export Credit Surveillance Memorandum</h3>
+                    <button class="btn-icon" onclick="Navigation.closeModal('modal-export')">✕</button>
+                </div>
+                <div class="modal-body">
+                    <p>Generate a standardized research briefing summarizing Carvana's credit trajectory, language divergence signals, and stress lab scenarios for current cutoff quarter.</p>
+                    <div class="export-options mt-4">
+                        <label class="export-checkbox">
+                            <input type="checkbox" checked disabled> Executive Credit Summary & Risk Rating
+                        </label>
+                        <label class="export-checkbox">
+                            <input type="checkbox" checked disabled> Triangulated Divergence Evidence Table
+                        </label>
+                        <label class="export-checkbox">
+                            <input type="checkbox" checked disabled> Stress Testing Laboratory Sensitivities
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-ghost" onclick="Navigation.closeModal('modal-export')">Cancel</button>
+                    <button class="btn btn-primary" onclick="window.print(); Navigation.closeModal('modal-export');">
+                        <span>🖨️</span> Print / Save PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- JAVASCRIPT BUNDLE (ORDER MATTERS) -->
+    <!-- ========================================================================= -->
+    <!-- 1. Chart.js CDN for Interactive Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- 2. Illustrative Demo Dataset -->
+    <script src="assets/js/data.js"></script>
+
+    <!-- 3. Deterministic Financial Math Engine -->
+    <script src="assets/js/financial.js"></script>
+
+    <!-- 4. Chart Manager -->
+    <script src="assets/js/charts.js"></script>
+
+    <!-- 5. Stress Testing Module -->
+    <script src="assets/js/stress-test.js"></script>
+
+    <!-- 6. Evidence & Audit Trail Manager -->
+    <script src="assets/js/evidence.js"></script>
+
+    <!-- 7. Navigation & Router Controller -->
+    <script src="assets/js/navigation.js"></script>
+
+    <!-- 8. Master Application Controller -->
+    <script src="assets/js/app.js"></script>
+
+</body>
+</html>

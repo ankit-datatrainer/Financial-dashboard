@@ -1,0 +1,37 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor & IDE Directories
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Node / Package Manager (if used in future)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build / Output Directories
+dist/
+build/
+.vercel/
+
+# Environment Variables & Sensitive Credentials
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Temporary Scratch Files & Logs
+*.log
+doc_text.txt
+tmp/
+scratch/

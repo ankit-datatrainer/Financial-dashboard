@@ -1,0 +1,1582 @@
+/* ==========================================================================
+   SANAH AI + PRIVATE CREDIT RESEARCH DASHBOARD
+   Component Stylesheet (components.css)
+   Version: 1.0.0
+   Institutional Credit Intelligence & Backtesting Visual System
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01. CREDIT TIMELINE (.credit-timeline)
+   Vertical timeline tracing historical credit events, amendments, and restructurings
+   -------------------------------------------------------------------------- */
+.credit-timeline {
+  position: relative;
+  padding: 24px 0 24px 28px;
+  margin: 0;
+}
+
+.credit-timeline::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 9px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-primary) 0%,
+    var(--border-color) 20%,
+    var(--border-color) 80%,
+    var(--accent-ai) 100%
+  );
+  border-radius: var(--radius-full);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 28px;
+  list-style: none;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Timeline marker / dot */
+.timeline-marker {
+  position: absolute;
+  left: -28px;
+  top: 14px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--bg-surface);
+  border: 3px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all var(--transition-fast);
+}
+
+.timeline-marker::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+}
+
+.timeline-marker.healthy {
+  border-color: var(--accent-success);
+}
+.timeline-marker.healthy::after {
+  background-color: var(--accent-success);
+}
+
+.timeline-marker.watch {
+  border-color: var(--accent-warning);
+}
+.timeline-marker.watch::after {
+  background-color: var(--accent-warning);
+}
+
+.timeline-marker.credit-event,
+.timeline-marker.distressed {
+  border-color: var(--accent-danger);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.45);
+}
+.timeline-marker.credit-event::after,
+.timeline-marker.distressed::after {
+  background-color: var(--accent-danger);
+}
+
+.timeline-marker.ai-signal {
+  border-color: var(--accent-ai);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.45);
+}
+.timeline-marker.ai-signal::after {
+  background-color: var(--accent-ai);
+}
+
+/* Timeline content card */
+.timeline-content {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.timeline-content:hover {
+  border-color: var(--border-highlight);
+  background-color: var(--bg-card-hover);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.timeline-date-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background-color: var(--accent-primary-subtle);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.timeline-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.timeline-description {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.timeline-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
+  font-size: 0.78rem;
+}
+
+/* --------------------------------------------------------------------------
+   02. DIVERGENCE PANEL (.divergence-panel)
+   3-Column signature view: Management Claim vs Quantitative Trend vs AI Rating
+   -------------------------------------------------------------------------- */
+.divergence-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.divergence-header-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.1fr;
+  gap: 20px;
+  padding: 0 16px 8px 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.divergence-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.1fr;
+  gap: 20px;
+  align-items: center;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.divergence-card:hover {
+  background-color: var(--bg-card-hover);
+  border-color: var(--border-highlight);
+  box-shadow: var(--shadow-md);
+}
+
+.divergence-card.divergent-flag {
+  border-left: 4px solid var(--accent-danger);
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.05) 0%, var(--bg-card) 25%);
+}
+
+.divergence-card.mixed-flag {
+  border-left: 4px solid var(--accent-warning);
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.05) 0%, var(--bg-card) 25%);
+}
+
+.divergence-card.aligned-flag {
+  border-left: 4px solid var(--accent-success);
+}
+
+/* Column 1: Management Claim */
+.divergence-col-claim {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.divergence-speaker-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.divergence-quote {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.45;
+  border-left: 2px solid var(--accent-primary);
+  padding-left: 10px;
+}
+
+/* Column 2: Hard Financial Numbers */
+.divergence-col-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+.divergence-metric-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.divergence-metric-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.divergence-metric-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Column 3: AI Divergence Rating & Verdict */
+.divergence-col-ai {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.divergence-rating-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  align-self: flex-start;
+}
+
+.divergence-rating-tag.divergent {
+  background-color: var(--accent-danger-subtle);
+  color: var(--accent-danger);
+  border: 1px solid var(--accent-danger-border);
+}
+
+.divergence-rating-tag.mixed {
+  background-color: var(--accent-warning-subtle);
+  color: var(--accent-warning);
+  border: 1px solid var(--accent-warning-border);
+}
+
+.divergence-rating-tag.aligned {
+  background-color: var(--accent-success-subtle);
+  color: var(--accent-success);
+  border: 1px solid var(--accent-success-border);
+}
+
+.divergence-explanation {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   03. CLAIM CARD (.claim-card)
+   Extracted management statement from 10-Q/10-K Item 7 or Earnings Call
+   -------------------------------------------------------------------------- */
+.claim-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all var(--transition-fast);
+}
+
+.claim-card:hover {
+  border-color: var(--border-highlight);
+  background-color: var(--bg-card-hover);
+}
+
+.claim-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.claim-speaker-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.claim-speaker-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.claim-speaker-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.claim-speaker-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.claim-source-ref {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.claim-text {
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  background-color: var(--bg-surface);
+  border-left: 3px solid var(--accent-ai);
+  padding: 10px 14px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+}
+
+.claim-scores-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+}
+
+.claim-score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.claim-score-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.claim-score-val {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   04. EVIDENCE CARD (.evidence-card)
+   Immutable audit trail record tied to SEC Edgar 10-Q/K filings & transcripts
+   -------------------------------------------------------------------------- */
+.evidence-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all var(--transition-fast);
+}
+
+.evidence-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-sm);
+}
+
+.evidence-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.evidence-source-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--accent-cyan);
+  background-color: var(--accent-cyan-subtle);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.evidence-excerpt-box {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  position: relative;
+}
+
+.evidence-excerpt-box mark,
+.highlight-text {
+  background-color: rgba(245, 158, 11, 0.22);
+  color: var(--text-primary);
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.evidence-metadata-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 8px;
+}
+
+.evidence-hash {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   05. METRIC TILE (.metric-tile)
+   Compact financial KPI block for liquidity, leverage, & coverage
+   -------------------------------------------------------------------------- */
+.metric-tile {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  transition: all var(--transition-fast);
+}
+
+.metric-tile:hover {
+  border-color: var(--border-highlight);
+  background-color: var(--bg-card-hover);
+}
+
+.metric-tile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.metric-tile-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metric-tile-body {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.metric-tile-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.metric-tile-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   06. SCORE GAUGE (.score-gauge)
+   Linear & circular visual risk meter (0 - 100 Credit Health Scale)
+   -------------------------------------------------------------------------- */
+.score-gauge-linear {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.score-gauge-labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.score-gauge-bar-track {
+  height: 10px;
+  width: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    var(--accent-danger) 0%,
+    var(--accent-danger) 35%,
+    var(--accent-warning) 50%,
+    var(--accent-warning) 70%,
+    var(--accent-success) 85%,
+    var(--accent-success) 100%
+  );
+  position: relative;
+  overflow: visible;
+}
+
+.score-gauge-pointer {
+  position: absolute;
+  top: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 3px solid var(--bg-primary);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  transform: translateX(-50%);
+  transition: left var(--transition-normal);
+}
+
+/* Circular Gauge Card */
+.score-gauge-circular {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.gauge-bg-circle {
+  fill: none;
+  stroke: var(--border-color);
+  stroke-width: 8;
+}
+
+.gauge-val-circle {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 75;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.score-gauge-circular.distressed .gauge-val-circle {
+  stroke: var(--accent-danger);
+}
+.score-gauge-circular.watch .gauge-val-circle {
+  stroke: var(--accent-warning);
+}
+.score-gauge-circular.healthy .gauge-val-circle {
+  stroke: var(--accent-success);
+}
+
+.gauge-inner-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-score-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.gauge-score-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   07. RISK INDICATOR (.risk-indicator)
+   Pulsing radar signal for quick portfolio-level surveillance
+   -------------------------------------------------------------------------- */
+.risk-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.risk-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.risk-indicator-dot::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  animation: pulsePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.risk-indicator.healthy {
+  background-color: var(--accent-success-subtle);
+  color: var(--accent-success);
+  border: 1px solid var(--accent-success-border);
+}
+.risk-indicator.healthy .risk-indicator-dot {
+  background-color: var(--accent-success);
+}
+.risk-indicator.healthy .risk-indicator-dot::after {
+  border: 2px solid var(--accent-success);
+}
+
+.risk-indicator.watch {
+  background-color: var(--accent-warning-subtle);
+  color: var(--accent-warning);
+  border: 1px solid var(--accent-warning-border);
+}
+.risk-indicator.watch .risk-indicator-dot {
+  background-color: var(--accent-warning);
+}
+.risk-indicator.watch .risk-indicator-dot::after {
+  border: 2px solid var(--accent-warning);
+}
+
+.risk-indicator.distressed {
+  background-color: var(--accent-danger-subtle);
+  color: var(--accent-danger);
+  border: 1px solid var(--accent-danger-border);
+}
+.risk-indicator.distressed .risk-indicator-dot {
+  background-color: var(--accent-danger);
+}
+.risk-indicator.distressed .risk-indicator-dot::after {
+  border: 2px solid var(--accent-danger);
+}
+
+@keyframes pulsePing {
+  0% { transform: scale(0.9); opacity: 1; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   08. INSTITUTIONAL COMPARISON TABLE (.comparison-table)
+   Side-by-side: Simple Quant vs AI Judgment vs Human vs Actual Outcome
+   -------------------------------------------------------------------------- */
+.comparison-table-wrapper {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.comparison-table th {
+  padding: 14px 16px;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.comparison-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
+}
+
+.comparison-table tr:hover td {
+  background-color: var(--bg-card-hover);
+}
+
+.comparison-cell-ai {
+  background-color: var(--accent-ai-subtle);
+  font-weight: 600;
+  border-left: 1px solid var(--accent-ai-border);
+  border-right: 1px solid var(--accent-ai-border);
+}
+
+/* --------------------------------------------------------------------------
+   09. STRESS TESTING PANEL (.stress-panel)
+   Interactive scenario modeling: Revenue, Margin, Interest, Refinancing Spreads
+   -------------------------------------------------------------------------- */
+.stress-panel {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 24px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.stress-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stress-scenario-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.stress-scenario-btn {
+  flex: 1;
+  padding: 8px 12px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.stress-scenario-btn:hover {
+  border-color: var(--border-highlight);
+  color: var(--text-primary);
+}
+
+.stress-scenario-btn.active {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+.stress-outputs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.stress-output-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stress-output-card.highlight {
+  border-color: var(--accent-danger-border);
+  background: linear-gradient(180deg, var(--accent-danger-subtle) 0%, var(--bg-surface) 100%);
+}
+
+.stress-output-header {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.stress-metric-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.stress-metric-label {
+  color: var(--text-secondary);
+}
+
+.stress-metric-val {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+/* --------------------------------------------------------------------------
+   10. EXPERIMENT CARD (.experiment-card)
+   Quarterly backtest experiment run result
+   -------------------------------------------------------------------------- */
+.experiment-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all var(--transition-fast);
+}
+
+.experiment-card:hover {
+  border-color: var(--border-highlight);
+  box-shadow: var(--shadow-sm);
+}
+
+.experiment-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.experiment-id {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-ai);
+  background-color: var(--accent-ai-subtle);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.experiment-question {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.experiment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 10px;
+}
+
+.experiment-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.experiment-stat-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.experiment-stat-value {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   11. DATA SOURCE CARD (.source-card)
+   -------------------------------------------------------------------------- */
+.source-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.source-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.source-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  font-size: 0.9rem;
+}
+
+.source-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.source-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.source-timestamp {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   12. SPARKLINE CONTAINER (.sparkline-container)
+   -------------------------------------------------------------------------- */
+.sparkline-container {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  width: 100px;
+  position: relative;
+}
+
+.sparkline-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sparkline-path {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sparkline-path.positive {
+  stroke: var(--accent-success);
+}
+
+.sparkline-path.negative {
+  stroke: var(--accent-danger);
+}
+
+.sparkline-area {
+  fill: var(--accent-primary-subtle);
+  opacity: 0.4;
+}
+
+/* --------------------------------------------------------------------------
+   13. HORIZONTAL QUARTER SELECTOR (.quarter-selector)
+   Timeline rail with quarterly decision points (Q1 2021 -> Q4 2025)
+   -------------------------------------------------------------------------- */
+.quarter-selector {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 6px 4px;
+  scrollbar-width: none; /* Hide scrollbar for sleek track */
+  -webkit-overflow-scrolling: touch;
+}
+
+.quarter-selector::-webkit-scrollbar {
+  display: none;
+}
+
+.quarter-pill {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.quarter-pill:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--border-highlight);
+}
+
+.quarter-pill.active {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+}
+
+.quarter-pill .event-indicator-dot {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-danger);
+}
+
+/* --------------------------------------------------------------------------
+   14. FILTER BAR (.filter-bar)
+   -------------------------------------------------------------------------- */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-chips-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 5px 12px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.filter-chip:hover {
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.filter-chip.active {
+  background-color: var(--accent-primary-subtle);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   15. INSIGHT CARD (.insight-card)
+   "Top 3 Reasons for Credit Change" block
+   -------------------------------------------------------------------------- */
+.insight-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: all var(--transition-fast);
+}
+
+.insight-card:hover {
+  border-color: var(--border-highlight);
+  background-color: var(--bg-card-hover);
+}
+
+.insight-severity-stripe {
+  width: 4px;
+  align-self: stretch;
+  border-radius: var(--radius-full);
+}
+
+.insight-severity-stripe.high { background-color: var(--accent-danger); }
+.insight-severity-stripe.medium { background-color: var(--accent-warning); }
+.insight-severity-stripe.low { background-color: var(--accent-primary); }
+
+.insight-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.insight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.insight-category {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-ai);
+}
+
+.insight-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.insight-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   16. NOTIFICATION BADGE (.notification-badge)
+   -------------------------------------------------------------------------- */
+.notification-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-full);
+  background-color: var(--accent-danger);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   17. LOADING SKELETON (.loading-skeleton)
+   -------------------------------------------------------------------------- */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 25%,
+    var(--bg-surface-elevated) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+.skeleton-text {
+  height: 14px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  height: 24px;
+  width: 60%;
+  margin-bottom: 12px;
+}
+
+.skeleton-box {
+  width: 100%;
+  height: 180px;
+}
+
+/* --------------------------------------------------------------------------
+   18. EMPTY STATE (.empty-state)
+   -------------------------------------------------------------------------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  background-color: var(--bg-card);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  margin: 20px 0;
+}
+
+.empty-state-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.empty-state-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.empty-state-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  max-width: 400px;
+  margin-bottom: 18px;
+}
+
+/* --------------------------------------------------------------------------
+   19. PERSISTENT DEMO BANNER (.demo-banner)
+   -------------------------------------------------------------------------- */
+.demo-banner {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+  border-bottom: 1px solid var(--accent-warning-border);
+  padding: 6px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 850;
+}
+
+.demo-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.demo-banner-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   20. CUSTOM TOOLTIPS (.tooltip-custom)
+   -------------------------------------------------------------------------- */
+.tooltip-custom {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-custom .tooltip-box {
+  visibility: hidden;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+  z-index: 1200;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.tooltip-custom:hover .tooltip-box {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   21. TAB GROUP (.tab-group)
+   Sub-navigation and view mode switchers
+   -------------------------------------------------------------------------- */
+.tab-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   22. ACCORDION (.accordion)
+   Expandable disclosures for deep audit notes and transcripts
+   -------------------------------------------------------------------------- */
+.accordion {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--bg-card);
+  margin-bottom: 12px;
+}
+
+.accordion-header {
+  padding: 14px 18px;
+  background-color: var(--bg-surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  transition: background-color var(--transition-fast);
+}
+
+.accordion-header:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.accordion-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.accordion-icon {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: transform var(--transition-normal);
+}
+
+.accordion.open .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  display: none;
+  padding: 18px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.accordion.open .accordion-content {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   23. PROGRESS BAR (.progress-bar)
+   Segmented liquidity headroom & covenant buffer meters
+   -------------------------------------------------------------------------- */
+.progress-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.progress-bar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+.progress-bar-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--border-color);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  display: flex;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--accent-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-normal);
+}
+
+.progress-bar-fill.success { background-color: var(--accent-success); }
+.progress-bar-fill.warning { background-color: var(--accent-warning); }
+.progress-bar-fill.danger { background-color: var(--accent-danger); }
+
+/* --------------------------------------------------------------------------
+   24. AVATARS & MODEL BADGES (.avatar)
+   -------------------------------------------------------------------------- */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar.ai-model {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: #ffffff;
+  border: 2px solid rgba(139, 92, 246, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   25. STATUS DOTS (.status-dot)
+   -------------------------------------------------------------------------- */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-dot.green { background-color: var(--accent-success); }
+.status-dot.amber { background-color: var(--accent-warning); }
+.status-dot.red { background-color: var(--accent-danger); }
+.status-dot.blue { background-color: var(--accent-primary); }
+.status-dot.purple { background-color: var(--accent-ai); }
+
+.status-dot.pulsing {
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* --------------------------------------------------------------------------
+   26. TREND ARROWS (.trend-arrow)
+   -------------------------------------------------------------------------- */
+.trend-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+}
+
+.trend-arrow.up.positive,
+.trend-arrow.down.inverted-positive {
+  color: var(--accent-success);
+}
+
+.trend-arrow.down.negative,
+.trend-arrow.up.inverted-negative {
+  color: var(--accent-danger);
+}
+
+.trend-arrow.flat {
+  color: var(--text-muted);
+}
